@@ -1,11 +1,791 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Brasa Burger: hambúrguer artesanal, batata crocante e muito sabor.">
+    <title>Brasa Burger | Hambúrguer artesanal</title>
+    <style>
+        :root {
+            --cream: #fff8ed;
+            --paper: #ffffff;
+            --ink: #202020;
+            --muted: #6d6a66;
+            --orange: #f47c20;
+            --orange-dark: #d55b0c;
+            --yellow: #ffc857;
+            --green: #3f7d58;
+            --border: #eee4d7;
+            --shadow: 0 18px 50px rgba(62, 36, 14, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--ink);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.5;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            margin: 0 auto;
+            max-width: 1180px;
+            padding: 0 24px;
+        }
+
+        .topbar {
+            background: var(--ink);
+            color: #fff;
+            font-size: 0.82rem;
+            padding: 9px 0;
+            text-align: center;
+        }
+
+        header {
+            background: var(--paper);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            min-height: 76px;
+        }
+
+        .brand {
+            align-items: center;
+            display: flex;
+            font-size: 1.4rem;
+            font-weight: 900;
+            gap: 10px;
+            letter-spacing: -0.05em;
+        }
+
+        .brand-mark {
+            align-items: center;
+            background: var(--orange);
+            border-radius: 12px;
+            color: #fff;
+            display: inline-flex;
+            font-size: 1.35rem;
+            height: 40px;
+            justify-content: center;
+            transform: rotate(-6deg);
+            width: 40px;
+        }
+
+        nav {
+            align-items: center;
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: var(--muted);
+            font-size: 0.93rem;
+            font-weight: 700;
+        }
+
+        nav a:hover {
+            color: var(--orange-dark);
+        }
+
+        .button {
+            background: var(--orange);
+            border: 0;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 0.92rem;
+            font-weight: 800;
+            padding: 13px 20px;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .button:hover {
+            background: var(--orange-dark);
+            transform: translateY(-2px);
+        }
+
+        .button.dark {
+            background: var(--ink);
+        }
+
+        .button.dark:hover {
+            background: #454545;
+        }
+
+        .hero {
+            overflow: hidden;
+            padding: 76px 0 84px;
+            position: relative;
+        }
+
+        .hero::before,
+        .hero::after {
+            background: var(--yellow);
+            border-radius: 50%;
+            content: "";
+            height: 190px;
+            opacity: 0.35;
+            position: absolute;
+            width: 190px;
+            z-index: -1;
+        }
+
+        .hero::before {
+            left: -90px;
+            top: 10px;
+        }
+
+        .hero::after {
+            bottom: -70px;
+            right: -50px;
+        }
+
+        .hero-grid {
+            align-items: center;
+            display: grid;
+            gap: 56px;
+            grid-template-columns: 1fr 0.95fr;
+        }
+
+        .eyebrow {
+            color: var(--orange-dark);
+            font-size: 0.8rem;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: clamp(2.7rem, 5vw, 5rem);
+            letter-spacing: -0.065em;
+            line-height: 0.98;
+            max-width: 580px;
+        }
+
+        h1 span {
+            color: var(--orange);
+        }
+
+        .hero-copy {
+            color: var(--muted);
+            font-size: 1.08rem;
+            margin: 24px 0 30px;
+            max-width: 470px;
+        }
+
+        .hero-actions {
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .delivery-note {
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .burger-art {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            min-height: 380px;
+            position: relative;
+        }
+
+        .burger-circle {
+            align-items: center;
+            background: var(--yellow);
+            border-radius: 50%;
+            display: flex;
+            font-size: 10rem;
+            height: 350px;
+            justify-content: center;
+            transform: rotate(-7deg);
+            width: 350px;
+        }
+
+        .floating-tag {
+            background: var(--ink);
+            border: 5px solid var(--cream);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 900;
+            height: 92px;
+            line-height: 1.1;
+            padding-top: 27px;
+            position: absolute;
+            right: 5%;
+            text-align: center;
+            top: 0;
+            transform: rotate(12deg);
+            width: 92px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-heading {
+            align-items: end;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 28px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            letter-spacing: -0.05em;
+            line-height: 1;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            max-width: 330px;
+            text-align: right;
+        }
+
+        .menu-grid {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .menu-card {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .menu-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+
+        .menu-image {
+            align-items: center;
+            background: #f7dfbb;
+            display: flex;
+            font-size: 5rem;
+            height: 190px;
+            justify-content: center;
+        }
+
+        .menu-image.green {
+            background: #d8e5bf;
+        }
+
+        .menu-image.red {
+            background: #f4c2a8;
+        }
+
+        .menu-info {
+            padding: 21px;
+        }
+
+        .menu-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+        }
+
+        .menu-info p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            min-height: 44px;
+        }
+
+        .price-row {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 17px;
+        }
+
+        .price {
+            color: var(--orange-dark);
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
+
+        .add-button {
+            background: var(--ink);
+            border: 0;
+            border-radius: 6px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 9px 12px;
+        }
+
+        .story {
+            background: var(--ink);
+            color: #fff;
+        }
+
+        .story-grid {
+            align-items: center;
+            display: grid;
+            gap: 60px;
+            grid-template-columns: 0.85fr 1fr;
+        }
+
+        .story-badge {
+            align-items: center;
+            background: var(--orange);
+            border-radius: 16px;
+            display: flex;
+            font-size: 8rem;
+            justify-content: center;
+            min-height: 300px;
+            transform: rotate(3deg);
+        }
+
+        .story p {
+            color: #d5d0c8;
+            margin: 20px 0 26px;
+            max-width: 520px;
+        }
+
+        .benefits {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .benefit {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .benefit-icon {
+            font-size: 1.8rem;
+            margin-bottom: 13px;
+        }
+
+        .benefit h3 {
+            font-size: 1rem;
+            margin-bottom: 7px;
+        }
+
+        .benefit p {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .cta {
+            background: var(--yellow);
+            padding: 55px 0;
+        }
+
+        .cta-content {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cta h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            letter-spacing: -0.05em;
+            line-height: 1;
+        }
+
+        .cta p {
+            margin-top: 8px;
+        }
+
+        footer {
+            background: var(--paper);
+            border-top: 1px solid var(--border);
+            padding: 28px 0;
+        }
+
+        .footer-content {
+            align-items: center;
+            color: var(--muted);
+            display: flex;
+            font-size: 0.83rem;
+            justify-content: space-between;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 17px;
+            font-weight: 800;
+        }
+
+        .cart-toggle {
+            align-items: center;
+            background: var(--ink);
+            border: 0;
+            border-radius: 50%;
+            color: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            font-size: 1.1rem;
+            height: 44px;
+            justify-content: center;
+            position: relative;
+            width: 44px;
+        }
+
+        .cart-count {
+            align-items: center;
+            background: var(--orange);
+            border: 2px solid #fff;
+            border-radius: 50%;
+            display: none;
+            font-size: 0.68rem;
+            height: 21px;
+            justify-content: center;
+            position: absolute;
+            right: -4px;
+            top: -5px;
+            width: 21px;
+        }
+
+        .cart-count.visible {
+            display: inline-flex;
+        }
+
+        .cart-panel {
+            background: var(--paper);
+            border-left: 1px solid var(--border);
+            box-shadow: -10px 0 35px rgba(62, 36, 14, 0.14);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            max-width: 380px;
+            padding: 25px;
+            position: fixed;
+            right: 0;
+            top: 0;
+            transform: translateX(105%);
+            transition: transform 0.25s ease;
+            width: 100%;
+            z-index: 30;
+        }
+
+        .cart-panel.open {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 18px;
+        }
+
+        .cart-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .close-cart {
+            background: transparent;
+            border: 0;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 18px 0;
+        }
+
+        .empty-cart {
+            color: var(--muted);
+            padding: 45px 0;
+            text-align: center;
+        }
+
+        .cart-item {
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 12px;
+            justify-content: space-between;
+            padding: 14px 0;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-size: 0.92rem;
+            font-weight: 800;
+        }
+
+        .cart-item-price {
+            color: var(--orange-dark);
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .quantity-controls {
+            align-items: center;
+            display: flex;
+            gap: 8px;
+        }
+
+        .quantity-controls button {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            height: 25px;
+            width: 25px;
+        }
+
+        .cart-total {
+            border-top: 1px solid var(--border);
+            display: flex;
+            font-size: 1.1rem;
+            font-weight: 900;
+            justify-content: space-between;
+            padding: 18px 0;
+        }
+
+        .cart-overlay {
+            background: rgba(32, 32, 32, 0.45);
+            display: none;
+            inset: 0;
+            position: fixed;
+            z-index: 20;
+        }
+
+        .cart-overlay.visible {
+            display: block;
+        }
+
+        @media (max-width: 760px) {
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 54px 0 65px;
+            }
+
+            .hero-grid,
+            .story-grid {
+                gap: 35px;
+                grid-template-columns: 1fr;
+            }
+
+            .burger-art {
+                min-height: 280px;
+            }
+
+            .burger-circle {
+                font-size: 7rem;
+                height: 260px;
+                width: 260px;
+            }
+
+            .floating-tag {
+                right: 10%;
+            }
+
+            .menu-grid,
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading,
+            .cta-content,
+            .footer-content {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .section-heading p {
+                text-align: left;
+            }
+
+            .story-badge {
+                min-height: 220px;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="topbar">🔥 Entrega grátis acima de R$ 50 na região central</div>
+
+    <header>
+        <div class="container navbar">
+            <a class="brand" href="#" aria-label="Brasa Burger - início">
+                <span class="brand-mark">🍔</span>
+                Brasa Burger
+            </a>
+            <nav aria-label="Navegação principal">
+                <a href="#cardapio">Cardápio</a>
+                <a href="#sobre">Nossa história</a>
+                <a href="#contato">Contato</a>
+                <a class="button" href="#pedido">Pedir agora</a>
+            </nav>
+            <button class="cart-toggle" id="cart-toggle" type="button" aria-label="Abrir carrinho" aria-expanded="false">
+                🛒<span class="cart-count" id="cart-count">0</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart-panel" id="cart-panel" aria-label="Carrinho de compras" aria-hidden="true">
+        <div class="cart-header">
+            <h2>Seu pedido</h2>
+            <button class="close-cart" id="close-cart" type="button" aria-label="Fechar carrinho">×</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <p class="empty-cart">Seu carrinho está vazio.<br>Escolha um hambúrguer para começar!</p>
+        </div>
+        <div class="cart-total">
+            <span>Total</span>
+            <span id="cart-total">R$ 0,00</span>
+        </div>
+        <button class="button" id="checkout-button" type="button">Finalizar pedido</button>
+    </aside>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <p class="eyebrow">Artesanal de verdade</p>
+                    <h1>O hambúrguer que <span>acende</span> seu dia.</h1>
+                    <p class="hero-copy">Pão macio, carne suculenta e ingredientes de verdade. Tudo feito na brasa para transformar sua fome em felicidade.</p>
+                    <div class="hero-actions">
+                        <a class="button" href="#cardapio">Ver o cardápio →</a>
+                        <span class="delivery-note">⏱ 25–35 min de entrega</span>
+                    </div>
+                </div>
+                <div class="burger-art" aria-label="Ilustração de hambúrguer">
+                    <div class="burger-circle">🍔</div>
+                    <div class="floating-tag">FEITO<br>NA BRASA</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="cardapio">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Favoritos da casa</h2>
+                    <p>Escolha seu próximo momento feliz. Combos acompanham fritas e bebida.</p>
+                </div>
+                <div class="menu-grid">
+                    <article class="menu-card" data-id="brasa-classico" data-name="Brasa Clássico" data-price="28.90">
+                        <div class="menu-image">🍔</div>
+                        <div class="menu-info">
+                            <h3>Brasa Clássico</h3>
+                            <p>Blend  smash de 160g, queijo prato, molho da casa e picles.</p>
+                            <div class="price-row"><strong class="price">R$ 28,90</strong><button class="add-button" type="button">Adicionar</button></div>
+                        </div>
+                    </article>
+                    <article class="menu-card" data-id="verde-crispy" data-name="Verde Crispy" data-price="31.90">
+                        <div class="menu-image green">🥬</div>
+                        <div class="menu-info">
+                            <h3>Verde Crispy</h3>
+                            <p>Frango crocante, cheddar, alface, tomate e maionese verde.</p>
+                            <div class="price-row"><strong class="price">R$ 31,90</strong><button class="add-button" type="button">Adicionar</button></div>
+                        </div>
+                    </article>
+                    <article class="menu-card" data-id="duplo-vulcao" data-name="Duplo Vulcão" data-price="36.90">
+                        <div class="menu-image red">🍔</div>
+                        <div class="menu-info">
+                            <h3>Duplo Vulcão</h3>
+                            <p>Dois blends, cheddar cremoso, bacon crocante e molho picante.</p>
+                            <div class="price-row"><strong class="price">R$ 36,90</strong><button class="add-button" type="button">Adicionar</button></div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section story" id="sobre">
+            <div class="container story-grid">
+                <div class="story-badge" aria-hidden="true">🔥</div>
+                <div>
+                    <p class="eyebrow">De onde vem o sabor</p>
+                    <h2>Pequena cozinha.<br>Grande personalidade.</h2>
+                    <p>Começamos com uma chapa, uma receita de família e a vontade de fazer o melhor hambúrguer do bairro. Hoje, seguimos do mesmo jeito: ingredientes selecionados, preparo cuidadoso e muita fumaça boa.</p>
+                    <a class="button" href="#contato">Conheça a Brasa</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container benefits">
+                <article class="benefit">
+                    <div class="benefit-icon">🥩</div>
+                    <h3>Carne selecionada</h3>
+                    <p>Blend exclusivo moído todos os dias para chegar sempre fresco à sua mesa.</p>
+                </article>
+                <article class="benefit">
+                    <div class="benefit-icon">🌱</div>
+                    <h3>Ingredientes frescos</h3>
+                    <p>Vegetais crocantes e molhos produzidos na nossa cozinha, sem atalhos.</p>
+                </article>
+                <article class="benefit">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Entrega rápida</h3>
+                    <p>Seu pedido chega quentinho e bem embalado para você aproveitar cada mordida.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="cta" id="pedido">
+            <div class="container cta-content">
+                <div>
+                    <h2>Bateu a fome?</h2>
+                    <p>Peça agora e deixe a felicidade chegar até você.</p>
+                </div>
+                <a class="button dark" href="tel:+5511999999999">📞 (11) 99999-9999</a>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contato">
+        <div class="container footer-content">
+            <p>© 2024 Brasa Burger. Feito com fogo e carinho.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Instagram">Instagram</a>
+                <a href="#" aria-label="WhatsApp">WhatsApp</a>
+            </div>
+        </div>
+    </footer>
 </body>
+    <script src="sistema.js"></script>
 </html>
